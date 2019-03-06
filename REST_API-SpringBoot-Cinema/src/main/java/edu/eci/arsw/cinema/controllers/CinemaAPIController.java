@@ -73,4 +73,20 @@ public class CinemaAPIController {
         }
 
     }
+
+    @PostMapping("/{name}")
+    public ResponseEntity<?> postFunctionInACinema(@PathVariable("name") String name, @RequestBody CinemaFunction cinemaFunction){
+        try {
+            cs.getCinemaByName(name).addFunction(cinemaFunction);
+            if(cinemaFunction==null) {
+                return new ResponseEntity<>("No se pudo agregar la funcion", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (CinemaException e) {
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        } catch (CinemaPersistenceException e) {
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        }
+
+    }
 }

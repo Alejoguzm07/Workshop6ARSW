@@ -38,4 +38,6 @@ public class Cinema {
     public void setSchedule(List<CinemaFunction> functions) {
         this.functions = functions;
     }
+
+    public void addFunction(CinemaFunction cinemaFunction){this.functions.add(cinemaFunction);}
 }
